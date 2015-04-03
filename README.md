@@ -19,15 +19,11 @@ $ sudo apt-get install puppet
 ```
 
 Ajouter le module apt : 
-=======================
 ```
 $ puppet module install puppetlabs-apt --modulepath=/home/yannick/puppet/modules
 ```
 
 Appliquer puppet :
-==================
 ```
 $ sudo puppet apply site.pp --modulepath=/home/yannick/puppet/modules
 ```
-
-
