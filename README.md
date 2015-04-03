@@ -1,21 +1,33 @@
 # puppet
-Configuration Puppet pour mes serveurs
+Configuration Puppet pour mes serveurs.
+Je part du principe que j'utilise mon compte (yannick) et que mon répertoire racine est /home/yannick
 
 # Pré-installation
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install build-essential git
+Installation de Git :
+```
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo apt-get install build-essential git
+$ git pull git@github.com:ymauray/puppet.git
+```
 
-Installer Puppet :
-sudo dpkg -i support/puppetlabs-release-trusty.deb
-sudo apt-get update
-sudo apt-get install puppet
+Installation de Puppet :
+```
+$ sudo dpkg -i support/puppetlabs-release-trusty.deb
+$ sudo apt-get update
+$ sudo apt-get install puppet
+```
 
 Ajouter le module apt : 
 =======================
-sudo puppet module install puppetlabs-apt
+```
+$ puppet module install puppetlabs-apt --modulepath=/home/yannick/puppet/modules
+```
 
 Appliquer puppet :
 ==================
-sudo puppet apply site.pp
+```
+$ sudo puppet apply site.pp --modulepath=/home/yannick/puppet/modules
+```
+
 
