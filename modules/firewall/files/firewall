@@ -1,0 +1,322 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          firewall
+# Required-Start:    $network
+# Required-Stop:     $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Sets/unsets iptables rules
+# Description:       Sets/unsets iptables rules.
+#  This script will set/unset iptables rules.
+### END INIT INFO
+
+case "$1" in
+start)
+# Ne pas casser les connexions etablies
+/sbin/iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+/sbin/iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+echo - Ne pas casser les connexions établies : [OK]
+
+# Autoriser loopback
+/sbin/iptables -t filter -A INPUT -i lo -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -o lo -j ACCEPT
+echo - Autoriser loopback : [OK]
+
+# Blacklist
+/sbin/iptables -A INPUT -s 1.93.34.13 -j DROP
+/sbin/iptables -A INPUT -s 1.93.34.219 -j DROP
+/sbin/iptables -A INPUT -s 5.135.161.162 -j DROP
+/sbin/iptables -A INPUT -s 14.141.13.34 -j DROP
+/sbin/iptables -A INPUT -s 14.207.48.137 -j DROP
+/sbin/iptables -A INPUT -s 23.20.37.80 -j DROP
+/sbin/iptables -A INPUT -s 23.20.44.127 -j DROP
+/sbin/iptables -A INPUT -s 37.59.5.96 -j DROP
+/sbin/iptables -A INPUT -s 37.59.8.109 -j DROP
+/sbin/iptables -A INPUT -s 37.205.198.162 -j DROP
+/sbin/iptables -A INPUT -s 41.41.54.146 -j DROP
+/sbin/iptables -A INPUT -s 46.167.245.187 -j DROP
+/sbin/iptables -A INPUT -s 50.19.11.3 -j DROP
+/sbin/iptables -A INPUT -s 58.6.152.1 -j DROP
+/sbin/iptables -A INPUT -s 59.56.31.142 -j DROP
+/sbin/iptables -A INPUT -s 60.173.8.117 -j DROP
+/sbin/iptables -A INPUT -s 61.147.107.117 -j DROP
+/sbin/iptables -A INPUT -s 61.160.213.171 -j DROP
+/sbin/iptables -A INPUT -s 61.174.51.200 -j DROP
+/sbin/iptables -A INPUT -s 61.174.51.217 -j DROP
+/sbin/iptables -A INPUT -s 61.174.51.217 -j DROP
+/sbin/iptables -A INPUT -s 61.174.51.234 -j DROP
+/sbin/iptables -A INPUT -s 62.219.208.63 -j DROP
+/sbin/iptables -A INPUT -s 67.202.6.32 -j DROP
+/sbin/iptables -A INPUT -s 69.64.43.67 -j DROP
+/sbin/iptables -A INPUT -s 72.44.73.123 -j DROP
+/sbin/iptables -A INPUT -s 79.190.130.50 -j DROP
+/sbin/iptables -A INPUT -s 80.82.64.197 -j DROP
+/sbin/iptables -A INPUT -s 82.146.124.189 -j DROP
+/sbin/iptables -A INPUT -s 82.165.147.213 -j DROP
+/sbin/iptables -A INPUT -s 84.200.16.170 -j DROP
+/sbin/iptables -A INPUT -s 85.25.209.149 -j DROP
+/sbin/iptables -A INPUT -s 85.185.163.84 -j DROP
+/sbin/iptables -A INPUT -s 86.51.159.34 -j DROP
+/sbin/iptables -A INPUT -s 86.51.159.35 -j DROP
+/sbin/iptables -A INPUT -s 87.106.52.92 -j DROP
+/sbin/iptables -A INPUT -s 87.106.54.124 -j DROP
+/sbin/iptables -A INPUT -s 91.121.61.137 -j DROP
+/sbin/iptables -A INPUT -s 91.121.65.132 -j DROP
+/sbin/iptables -A INPUT -s 91.121.74.68 -j DROP
+/sbin/iptables -A INPUT -s 91.121.78.40 -j DROP
+/sbin/iptables -A INPUT -s 91.121.122.157 -j DROP
+/sbin/iptables -A INPUT -s 91.121.161.102 -j DROP
+/sbin/iptables -A INPUT -s 91.121.170.16 -j DROP
+/sbin/iptables -A INPUT -s 91.121.192.82 -j DROP
+/sbin/iptables -A INPUT -s 91.121.205.31 -j DROP
+/sbin/iptables -A INPUT -s 91.215.180.166 -j DROP
+/sbin/iptables -A INPUT -s 91.223.89.47 -j DROP
+/sbin/iptables -A INPUT -s 94.23.3.55 -j DROP
+/sbin/iptables -A INPUT -s 94.23.216.23 -j DROP
+/sbin/iptables -A INPUT -s 94.51.41.0 -j DROP
+/sbin/iptables -A INPUT -s 94.127.191.196 -j DROP
+/sbin/iptables -A INPUT -s 94.198.224.254 -j DROP
+/sbin/iptables -A INPUT -s 107.21.64.204 -j DROP
+/sbin/iptables -A INPUT -s 108.56.241.7 -j DROP
+/sbin/iptables -A INPUT -s 111.74.134.216 -j DROP
+/sbin/iptables -A INPUT -s 115.87.153.1 -j DROP
+/sbin/iptables -A INPUT -s 116.10.191.164 -j DROP
+/sbin/iptables -A INPUT -s 116.10.191.177 -j DROP
+/sbin/iptables -A INPUT -s 116.10.191.179 -j DROP
+/sbin/iptables -A INPUT -s 116.10.191.197 -j DROP
+/sbin/iptables -A INPUT -s 116.10.191.198 -j DROP
+/sbin/iptables -A INPUT -s 116.10.191.201 -j DROP
+/sbin/iptables -A INPUT -s 116.10.191.206 -j DROP
+/sbin/iptables -A INPUT -s 117.27.158.88 -j DROP
+/sbin/iptables -A INPUT -s 117.79.91.220 -j DROP
+/sbin/iptables -A INPUT -s 118.163.72.103 -j DROP
+/sbin/iptables -A INPUT -s 121.10.172.157 -j DROP
+/sbin/iptables -A INPUT -s 121.101.208.41 -j DROP
+/sbin/iptables -A INPUT -s 121.101.208.41 -j DROP
+/sbin/iptables -A INPUT -s 123.125.67.180 -j DROP
+/sbin/iptables -A INPUT -s 123.125.67.242 -j DROP
+/sbin/iptables -A INPUT -s 124.172.223.120 -j DROP
+/sbin/iptables -A INPUT -s 125.26.173.29 -j DROP
+/sbin/iptables -A INPUT -s 129.97.41.115 -j DROP
+/sbin/iptables -A INPUT -s 144.0.0.35 -j DROP
+/sbin/iptables -A INPUT -s 160.75.90.190 -j DROP
+/sbin/iptables -A INPUT -s 160.75.169.47 -j DROP
+/sbin/iptables -A INPUT -s 171.97.147.94 -j DROP
+/sbin/iptables -A INPUT -s 174.128.36.45 -j DROP
+/sbin/iptables -A INPUT -s 174.129.181.86 -j DROP
+/sbin/iptables -A INPUT -s 176.31.117.124 -j DROP
+/sbin/iptables -A INPUT -s 178.77.66.216 -j DROP
+/sbin/iptables -A INPUT -s 184.72.191.15 -j DROP
+/sbin/iptables -A INPUT -s 184.173.190.238 -j DROP
+/sbin/iptables -A INPUT -s 187.209.199.121 -j DROP
+/sbin/iptables -A INPUT -s 187.242.77.124 -j DROP
+/sbin/iptables -A INPUT -s 188.10.237.167 -j DROP
+/sbin/iptables -A INPUT -s 189.192.233.86 -j DROP
+/sbin/iptables -A INPUT -s 190.105.101.14 -j DROP
+/sbin/iptables -A INPUT -s 191.238.56.53 -j DROP
+/sbin/iptables -A INPUT -s 192.73.235.248 -j DROP
+/sbin/iptables -A INPUT -s 192.227.234.223 -j DROP
+/sbin/iptables -A INPUT -s 194.44.191.130 -j DROP
+/sbin/iptables -A INPUT -s 194.58.39.219 -j DROP
+/sbin/iptables -A INPUT -s 194.176.119.203 -j DROP
+/sbin/iptables -A INPUT -s 195.57.0.110 -j DROP
+/sbin/iptables -A INPUT -s 195.155.128.45 -j DROP
+/sbin/iptables -A INPUT -s 195.230.113.7 -j DROP
+/sbin/iptables -A INPUT -s 196.202.12.178 -j DROP
+/sbin/iptables -A INPUT -s 199.180.115.106 -j DROP
+/sbin/iptables -A INPUT -s 209.172.32.213 -j DROP
+/sbin/iptables -A INPUT -s 212.138.98.202 -j DROP
+/sbin/iptables -A INPUT -s 212.154.162.12 -j DROP
+/sbin/iptables -A INPUT -s 212.183.98.203 -j DROP
+/sbin/iptables -A INPUT -s 212.183.191.254 -j DROP
+/sbin/iptables -A INPUT -s 218.80.198.230 -j DROP
+/sbin/iptables -A INPUT -s 218.94.151.146 -j DROP
+/sbin/iptables -A INPUT -s 219.138.135.61 -j DROP
+/sbin/iptables -A INPUT -s 220.181.51.155 -j DROP
+/sbin/iptables -A INPUT -s 220.181.51.156 -j DROP
+/sbin/iptables -A INPUT -s 220.181.51.217 -j DROP
+/sbin/iptables -A INPUT -s 220.181.51.218 -j DROP
+/sbin/iptables -A INPUT -s 220.181.51.219 -j DROP
+/sbin/iptables -A INPUT -s 220.181.51.220 -j DROP
+/sbin/iptables -A INPUT -s 222.186.30.249 -j DROP
+echo - Blacklist : [OK]
+
+# Autoriser SSH
+/sbin/iptables -A INPUT -i eth0 -p tcp --dport 22 --source cache.ovh.net -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 1223 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 1022 -j ACCEPT
+echo - Autoriser SSH : [OK]
+
+# Autoriser NoMachine
+/sbin/iptables -t filter -A INPUT -p tcp --dport 4000 -j ACCEPT
+echo - Autoriser NoMachine : [OK]
+
+# Autoriser OpenLDAP
+/sbin/iptables -t filter -A INPUT -p tcp --dport 389 -j ACCEPT
+echo - Autoriser OpenLDAP : [OK]
+
+# Autoriser git
+/sbin/iptables -t filter -A INPUT -p tcp --dport 9418 -j ACCEPT
+echo - Autoriser GIT : [OK]
+
+# Autoriser les requetes SSH, DNS, FTP, HTTP, NTP, NNTP, OCO
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 21 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 22 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 79 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 80 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 443 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 8081 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 8210 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 53 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p udp --dport 53 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 119 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p udp --dport 123 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p udp --dport 9004 -j ACCEPT
+echo - Autoriser les requetes SSH, DNS, FTP, HTTP, NTP, NNTP, OCO : [OK]
+
+# HTTP
+/sbin/iptables -t filter -A INPUT -p tcp --dport 80 -j ACCEPT
+#/sbin/iptables -t filter -A INPUT -p tcp --dport 8080 -j ACCEPT
+#/sbin/iptables -t filter -A INPUT -p tcp --dport 8081 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 443 -j ACCEPT
+#/sbin/iptables -t filter -A INPUT -p tcp --dport 8443 -j ACCEPT
+#/sbin/iptables -t filter -A INPUT -p tcp --dport 7001 -j ACCEPT
+#/sbin/iptables -t filter -A INPUT -p tcp --dport 8090 -j ACCEPT
+# -- Jenkins
+#/sbin/iptables -t filter -A INPUT -p tcp --dport 9080 -j ACCEPT
+echo - Autoriser serveur Apache : [OK]
+
+# MySQL
+/sbin/iptables -t filter -A INPUT -p tcp --dport 3306 -j ACCEPT
+echo - Autoriser serveur MySQL : [OK]
+
+# MongoDB
+#/sbin/iptables -t filter -A INPUT -p tcp --dport 27017 -j ACCEPT
+echo - Autoriser serveur MongoDB : [OK]
+
+# SHOUTCAST
+# -- Invités
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8890 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8891 -j ACCEPT
+# -- Euterpia Radio
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8888 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8889 -j ACCEPT
+# -- Nephie
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8765 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8766 -j ACCEPT
+# -- Le Village
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8900 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8901 -j ACCEPT
+# -- Bluu
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8902 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8903 -j ACCEPT
+# -- Linoa / Karen
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8904 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8905 -j ACCEPT
+# -- Batty
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8906 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8907 -j ACCEPT
+echo - Autoriser serveur Shoutcast : [OK]
+
+# ICECAST
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8000 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 8001 -j ACCEPT
+echo - Autoriser serveur IceCast : [OK]
+
+# TEAMSPEAK
+/sbin/iptables -A INPUT -p udp --dport 8767 -j ACCEPT
+/sbin/iptables -A INPUT -p udp --dport 8768 -j ACCEPT
+/sbin/iptables -A INPUT -p udp --dport 8765 -j ACCEPT
+/sbin/iptables -A INPUT -p tcp --dport 14534 -j ACCEPT
+/sbin/iptables -A INPUT -p tcp --dport 51234 -j ACCEPT
+echo - Autoriser TeamSpeak : [OK]
+
+# TEAMSPEAK 3
+/sbin/iptables -A INPUT -p udp --dport 9987 -j ACCEPT
+/sbin/iptables -A INPUT -p udp --dport 9988 -j ACCEPT
+/sbin/iptables -A INPUT -p udp --dport 9989 -j ACCEPT
+/sbin/iptables -A INPUT -p tcp --dport 30033 -j ACCEPT
+/sbin/iptables -A INPUT -p tcp --dport 10011 -j ACCEPT
+echo - Autoriser TeamSpeak 3 : [OK]
+
+# MURMUR
+/sbin/iptables -A INPUT -p udp --dport 64738 -j ACCEPT
+/sbin/iptables -A INPUT -p tcp --dport 64738 -j ACCEPT
+echo - Autoriser Mumble : [OK]
+
+# OCO
+/sbin/iptables -t filter -A INPUT -p tcp --dport 79 -j ACCEPT
+echo - Autoriser serveur OCO : [OK]
+
+# DNS
+/sbin/iptables -t filter -A INPUT -p tcp --dport 53 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p udp --dport 53 -j ACCEPT
+echo - Autoriser serveur DNS : [OK]
+
+# FTP
+/sbin/iptables -t filter -A INPUT -p tcp --dport 20 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 21 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -p tcp --dport 22 -j ACCEPT
+/sbin/iptables -t filter -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+echo - Autoriser serveur FTP : [OK]
+
+# Mail
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 587 -j ACCEPT
+echo - Autoriser serveur Mail : [OK]
+
+# RTM
+/sbin/iptables -t filter -A OUTPUT -p udp --dport 6100:6200 -j ACCEPT
+echo - Autoriser monitoring RTM : [OK]
+
+#Ping OVH
+/sbin/iptables -A INPUT -i eth0 -p icmp --source proxy.ovh.net -j ACCEPT
+/sbin/iptables -A INPUT -i eth0 -p icmp --source proxy.p19.ovh.net -j ACCEPT
+/sbin/iptables -A INPUT -i eth0 -p icmp --source proxy.rbx.ovh.net -j ACCEPT
+/sbin/iptables -A INPUT -i eth0 -p icmp --source ping.ovh.net -j ACCEPT
+/sbin/iptables -A INPUT -i eth0 -p icmp --source 91.121.88.250 -j ACCEPT # IP = aaa.bbb.ccc obtenue selon la règle precedente
+/sbin/iptables -A INPUT -i eth0+ -p icmp --icmp-type echo-request -m limit --limit 3/s -j ACCEPT
+echo - Ping OVH : [OK]
+
+#CVS
+/sbin/iptables -A INPUT -p udp --dport 2401 -j ACCEPT
+/sbin/iptables -A INPUT -p tcp --dport 2401 -j ACCEPT
+echo - CVS : [OK]
+
+#GIT
+/sbin/iptables -A INPUT -p udp --dport 9418 -j ACCEPT
+/sbin/iptables -A INPUT -p tcp --dport 9418 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p udp --dport 9418 -j ACCEPT
+/sbin/iptables -t filter -A OUTPUT -p tcp --dport 9418 -j ACCEPT
+echo - GIT : [OK]
+
+# on refuse tout le reste
+/sbin/iptables -A INPUT -j REJECT
+#/sbin/iptables -A OUTPUT -j REJECT
+/sbin/iptables -A FORWARD -j REJECT
+
+exit 0
+;;
+
+stop)
+/sbin/iptables -F INPUT
+/sbin/iptables -F OUTPUT
+/sbin/iptables -F FORWARD
+exit 0
+;;
+status)
+/sbin/iptables -L -n | grep DROP > /dev/null
+if [ "$?" -eq "0" ]
+then
+	echo "Firewall is up"
+	exit 0
+else
+	echo "Firewall is down"
+	exit 3
+fi
+;;
+*)
+echo "Usage: /etc/init.d/firewall {start|stop}"
+exit 1
+;;
+esac
+

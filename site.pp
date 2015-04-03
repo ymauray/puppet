@@ -5,3 +5,4 @@ include tomcat
 include shells
 include teamspeak
 include remotedesktop
+include firewall
